@@ -48,8 +48,8 @@ export function MotionProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     document.documentElement.classList.add("motion-ready");
     const refresh = () => ScrollTrigger.refresh();
+    // One re-measure once fonts and images have loaded (fonts are preloaded, so they finish first).
     if (document.readyState !== "complete") window.addEventListener("load", refresh, { once: true });
-    document.fonts?.ready.then(refresh);
     return () => window.removeEventListener("load", refresh);
   }, []);
 

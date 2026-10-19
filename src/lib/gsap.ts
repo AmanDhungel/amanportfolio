@@ -35,6 +35,9 @@ export const media = {
   finePointer: "(min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)",
 } as const;
 
+/** Dispatched on window when the opening sequence ends (or is skipped). */
+export const INTRO_DONE_EVENT = "ad:intro-done";
+
 /** True when the boot script enabled motion and the failsafe has not removed it. */
 export function motionEnabled(): boolean {
   return document.documentElement.classList.contains("js-motion");

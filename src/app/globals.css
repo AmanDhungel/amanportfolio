@@ -204,11 +204,15 @@
 .js-motion:not(.intro-seen) body:has([data-intro]) {
   overflow: hidden;
 }
+/*
+ * Pre-reveal state. Opacity, not visibility: content waiting to reveal stays in
+ * the accessibility tree, so screen readers can reach headings and links below the fold.
+ */
 .js-motion:not(.intro-seen) body:has([data-intro]) [data-nav-item],
 .js-motion [data-intro-name],
 .js-motion [data-split],
 .js-motion [data-hero-reveal] {
-  visibility: hidden;
+  opacity: 0;
 }
 /* SplitText measures lines itself; balanced wrapping fights it. */
 .js-motion [data-split] {

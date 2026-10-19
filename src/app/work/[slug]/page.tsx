@@ -44,12 +44,11 @@ export default async function CaseStudy({ params }: PageProps<"/work/[slug]">) {
             All work
           </Link>
           <h1
-            data-split="chars"
             className="mt-8 max-w-[18ch] font-serif text-[clamp(3rem,8vw,7rem)] leading-[0.95] font-normal tracking-[-0.03em]"
           >
             {project.name}
           </h1>
-          <p data-split="lines" className="mt-6 max-w-[48ch] text-lead">
+          <p className="mt-6 max-w-[48ch] text-lead">
             {project.summary}
           </p>
 
@@ -81,7 +80,7 @@ export default async function CaseStudy({ params }: PageProps<"/work/[slug]">) {
         </header>
 
         <figure className="container-page">
-          <div data-reveal="clip" className="overflow-hidden rounded-lg border border-rule">
+          <div className="overflow-hidden rounded-lg border border-rule">
             <Image
               src={project.shot.src}
               alt={project.shot.alt}

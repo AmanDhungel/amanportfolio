@@ -76,14 +76,14 @@ export function Work() {
             <li
               key={project.name}
               data-batch-item
-              className="grid gap-2 border-t border-rule py-5 md:grid-cols-12 md:items-baseline md:gap-6"
+              className="grid gap-2 border-t border-rule py-5 md:grid-cols-12 md:items-baseline md:gap-x-6"
             >
-              <p className="font-medium md:col-span-3">{project.name}</p>
-              <p className="text-muted md:col-span-5">{project.description}</p>
-              <p className="text-small text-muted md:col-span-2">
+              <p className="font-medium md:col-span-4 xl:col-span-3">{project.name}</p>
+              <p className="text-muted md:col-span-8 xl:col-span-5">{project.description}</p>
+              <p className="text-small text-muted md:col-span-4 xl:col-span-2">
                 {project.role} · {project.year}
               </p>
-              <p className="text-small md:col-span-2 md:text-right">
+              <p className="min-w-0 text-small [overflow-wrap:anywhere] md:col-span-8 xl:col-span-2 xl:text-right">
                 {project.link ? (
                   <a href={project.link.href} className="link" target="_blank" rel="noopener noreferrer">
                     {project.link.label}

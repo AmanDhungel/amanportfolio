@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 
 import { person } from "@/content/site";
 import { INTRO_STORAGE_KEY } from "@/lib/boot-script";
-import { duration, ease, Flip, fontsReady, gsap, motionEnabled, ScrollTrigger, SplitText, useGSAP } from "@/lib/gsap";
+import { duration, ease, Flip, fontsReady, gsap, INTRO_DONE_EVENT, motionEnabled, SplitText, useGSAP } from "@/lib/gsap";
 
 const MIN_INTRO = 0.9;
 const MAX_INTRO = 1.6;
@@ -65,14 +65,19 @@ export function Intro() {
 
       /** Tagline by lines, then buttons, then the badge pulses once. */
       const revealHero = (timeline: gsap.core.Timeline, at: number) => {
-        const split = SplitText.create(tagline, { type: "lines", mask: "lines", linesClass: "split-line" });
-        gsap.set(tagline, { visibility: "visible" });
+        const split = SplitText.create(tagline, {
+          type: "lines",
+          mask: "lines",
+          linesClass: "split-line",
+          aria: "none", // whole words stay intact; aria-label is not allowed on <p>
+        });
+        gsap.set(tagline, { opacity: 1 });
         timeline
           .from(split.lines, { yPercent: 105, duration: 0.8, ease: ease.reveal, stagger: 0.07 }, at)
           .fromTo(
             items,
-            { autoAlpha: 0, y: 16 },
-            { autoAlpha: 1, y: 0, duration: duration.ui, ease: ease.ui, stagger: 0.06 },
+            { opacity: 0, y: 16 },
+            { opacity: 1, y: 0, duration: duration.ui, ease: ease.ui, stagger: 0.06 },
             at + 0.15,
           );
         if (pulse) {
@@ -117,7 +122,7 @@ export function Intro() {
         gsap.set(heroName, { clearProps: "position,zIndex" });
         markIntroSeen();
         lenisRef.current?.start();
-        ScrollTrigger.refresh();
+        window.dispatchEvent(new Event(INTRO_DONE_EVENT));
       });
 
       const exit = contextSafe(() => {
@@ -136,8 +141,8 @@ export function Intro() {
           .add(Flip.from(state, { targets: heroName, duration: duration.wipe, ease: ease.wipe, scale: true }), 0)
           .fromTo(
             navItems,
-            { autoAlpha: 0, y: -10 },
-            { autoAlpha: 1, y: 0, duration: duration.ui, ease: ease.ui, stagger: 0.05 },
+            { opacity: 0, y: -10 },
+            { opacity: 1, y: 0, duration: duration.ui, ease: ease.ui, stagger: 0.05 },
             0.35,
           );
         revealHero(outro, 0.3);
@@ -155,7 +160,7 @@ export function Intro() {
           if (cancelled || outro) return;
           context.add(() => {
             const split = SplitText.create(introName, { type: "words,chars", mask: "chars", charsClass: "split-char" });
-            gsap.set(introName, { visibility: "visible" });
+            gsap.set(introName, { opacity: 1 });
             nameIn = gsap.timeline().from(split.chars, { yPercent: 110, duration: 0.55, ease: ease.reveal, stagger: 0.035 });
           });
         }),
