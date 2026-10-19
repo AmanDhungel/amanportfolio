@@ -3,18 +3,18 @@ import { person } from "@/content/site";
 
 export function Hero() {
   return (
-    <section aria-labelledby="hero-name" className="container-page pt-32 pb-12 sm:pt-40 md:pb-16">
+    <section aria-labelledby="hero-name" className="container-page pt-28 pb-10 sm:pt-36 md:pb-12">
       <h1
         id="hero-name"
         data-hero-name
         data-flip-id="hero-name"
-        className="font-serif text-display font-normal tracking-[-0.03em] [font-variation-settings:'opsz'_72]"
+        className="w-fit font-serif text-display font-normal tracking-[-0.03em] [font-variation-settings:'opsz'_72]"
       >
         <span className="block md:inline">{person.firstName}</span>{" "}
         <em className="block italic md:inline">{person.lastName}</em>
       </h1>
 
-      <div className="mt-10 grid gap-8 md:mt-14 md:grid-cols-12 md:items-end">
+      <div className="mt-8 grid gap-8 md:mt-10 md:grid-cols-12 md:items-end">
         <p data-hero-reveal="lines" className="max-w-[34ch] text-lead text-ink md:col-span-7">
           {person.headline}
         </p>
@@ -37,7 +37,7 @@ export function Hero() {
         </dl>
       </div>
 
-      <div className="mt-10 flex flex-wrap gap-3">
+      <div className="mt-8 flex flex-wrap gap-3">
         <NavAnchor href="#work" className="btn btn-primary" data-hero-reveal="item" data-magnetic>
           View work
         </NavAnchor>

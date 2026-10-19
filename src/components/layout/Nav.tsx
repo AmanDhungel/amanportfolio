@@ -16,6 +16,31 @@ export function Nav() {
   const setOpen = (value: boolean) => setOpenOn(value ? pathname : null);
   const menuId = useId();
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+
+  // Hide while scrolling down, show again on any scroll up. Never hides while the
+  // menu is open or something inside the nav has keyboard focus.
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+    let lastY = window.scrollY;
+    let frame = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const y = window.scrollY;
+        if (Math.abs(y - lastY) < 6) return;
+        const busy = header.contains(document.activeElement) || buttonRef.current?.getAttribute("aria-expanded") === "true";
+        header.dataset.hidden = String(y > 160 && y > lastY && !busy);
+        lastY = y;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
 
   // Escape closes the menu and returns focus to its button.
   useEffect(() => {
@@ -33,7 +58,7 @@ export function Nav() {
   const hrefFor = (hash: string) => (onHome ? hash : `/${hash}`);
 
   return (
-    <header data-nav className="fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top,0px)]">
+    <header ref={headerRef} data-nav onFocus={() => headerRef.current?.setAttribute("data-hidden", "false")} className="fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top,0px)]">
       <div className="absolute inset-0 -z-10 border-b border-rule/70 bg-bg/85 backdrop-blur-md" aria-hidden="true" />
       <nav aria-label="Main" className="container-page flex h-16 items-center justify-between gap-6">
         <Link

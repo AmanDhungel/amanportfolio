@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { WalkthroughMotion } from "@/components/motion/WalkthroughMotion";
 import { StepDiagram } from "@/components/sections/WalkthroughDiagrams";
 import { walkthrough, type WalkthroughStep } from "@/content/site";
 
@@ -37,6 +38,7 @@ export function Walkthrough() {
   const { steps } = walkthrough;
   return (
     <section aria-labelledby="walk-title" data-walkthrough className="mt-24 md:mt-36">
+      <WalkthroughMotion />
       <div data-walk-pin className="container-page walk-pin">
         <div className="grid gap-4 md:grid-cols-12 md:items-end">
           <h3

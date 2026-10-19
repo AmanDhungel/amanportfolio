@@ -201,20 +201,21 @@
 .js-motion:not(.intro-seen) .intro {
   display: flex;
 }
-.js-motion:not(.intro-seen) body {
+.js-motion:not(.intro-seen) body:has([data-intro]) {
   overflow: hidden;
 }
+.js-motion:not(.intro-seen) body:has([data-intro]) [data-nav-item],
+.js-motion [data-intro-name],
 .js-motion [data-split],
 .js-motion [data-hero-reveal] {
   visibility: hidden;
 }
+/* SplitText measures lines itself; balanced wrapping fights it. */
+.js-motion [data-split] {
+  text-wrap: wrap;
+}
 .js-motion [data-reveal="clip"] {
   clip-path: inset(100% 0% 0% 0%);
-}
-/* While the intro runs, the hero name sits above the intro panel so the Flip is never covered. */
-.js-motion:not(.intro-seen) [data-hero-name] {
-  position: relative;
-  z-index: 110;
 }
 
 /* SplitText masks: keep descenders and italic overhangs inside the mask. */
@@ -248,6 +249,14 @@
   .js-motion .walk-stage {
     display: grid;
   }
+  /* The pinned frame fills one screen, below the nav. */
+  .js-motion .walk-pin {
+    display: flex;
+    min-height: 100svh;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 5.5rem 2.5rem;
+  }
   .js-motion .walk-list {
     position: absolute;
     width: 1px;
@@ -263,4 +272,27 @@
   .js-motion [data-walk-detail]:not(:first-child) {
     visibility: hidden;
   }
+}
+
+/* Experience timeline dot once the drawn rail reaches it. */
+[data-timeline-dot] {
+  transition:
+    background-color 0.4s var(--ease-reveal),
+    border-color 0.4s var(--ease-reveal);
+}
+[data-timeline-dot].is-reached {
+  border-color: var(--ink);
+  background: var(--ink);
+}
+
+/* Nav slides away while scrolling down, back on scroll up. */
+[data-nav] {
+  transition: transform 0.45s var(--ease-reveal);
+}
+[data-nav][data-hidden="true"] {
+  transform: translateY(-100%);
+}
+
+[data-walk-title].is-active {
+  color: var(--ink);
 }

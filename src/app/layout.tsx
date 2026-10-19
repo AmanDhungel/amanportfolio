@@ -3,6 +3,7 @@ import { Hanken_Grotesk, Newsreader } from "next/font/google";
 
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
+import { MotionProvider } from "@/components/motion/MotionProvider";
 import { about, person, skills } from "@/content/site";
 import { bootScript } from "@/lib/boot-script";
 import { siteUrl } from "@/lib/site-url";
@@ -102,9 +103,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <a href="#main" className="skip-link">
           Skip to content
         </a>
-        <Nav />
-        {children}
-        <Footer />
+        <MotionProvider>
+          <Nav />
+          {children}
+          <Footer />
+        </MotionProvider>
       </body>
     </html>
   );

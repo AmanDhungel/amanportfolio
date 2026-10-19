@@ -72,13 +72,16 @@ function SchedulingDiagram() {
   return (
     <Frame label="One week for three staff members">
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[20rem] border-separate border-spacing-1 text-small">
+        <table className="w-full table-fixed border-separate border-spacing-1 text-small">
           <thead>
             <tr>
-              <th className="w-20" />
+              <th className="w-16 sm:w-20" />
               {days.map((day) => (
                 <th key={day} scope="col" className="pb-1 text-center font-medium text-muted">
-                  {day}
+                  <abbr title={day} className="no-underline sm:hidden">
+                    {day[0]}
+                  </abbr>
+                  <span className="hidden sm:inline">{day}</span>
                 </th>
               ))}
             </tr>

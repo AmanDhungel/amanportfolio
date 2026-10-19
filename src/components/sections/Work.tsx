@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { SectionHeading } from "@/components/sections/SectionHeading";
+import { WorkPreview } from "@/components/motion/WorkPreview";
 import { Walkthrough } from "@/components/sections/Walkthrough";
 import { featured, otherWork } from "@/content/site";
 
@@ -13,7 +14,7 @@ export function Work() {
           Three projects, with the problem, what I built, and how it holds up in production.
         </SectionHeading>
 
-        <div data-work-index className="relative mt-14 md:mt-20">
+        <div data-work-index className="relative mt-10 md:mt-14">
           <ul className="border-b border-rule">
             {featured.map((project, index) => (
               <li
@@ -54,13 +55,13 @@ export function Work() {
                       placeholder="blur"
                       sizes="(min-width: 1440px) 1340px, 94vw"
                       className="h-auto w-full"
-                      data-parallax
                     />
                   </div>
                 </figure>
               </li>
             ))}
           </ul>
+          <WorkPreview shots={featured.map((project) => project.shot)} />
         </div>
       </div>
 

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { PageMotion } from "@/components/motion/PageMotion";
 import { featured, type Qualities } from "@/content/site";
 
 export function generateStaticParams() {
@@ -36,7 +37,7 @@ export default async function CaseStudy({ params }: PageProps<"/work/[slug]">) {
   const next = featured[(index + 1) % featured.length];
 
   return (
-    <main id="main" tabIndex={-1} className="outline-none">
+    <PageMotion>
       <article>
         <header className="container-page pt-32 pb-12 sm:pt-40">
           <Link href="/#work" className="link text-small">
@@ -88,7 +89,6 @@ export default async function CaseStudy({ params }: PageProps<"/work/[slug]">) {
               priority
               sizes="(min-width: 1440px) 1340px, 94vw"
               className="h-auto w-full"
-              data-parallax
             />
           </div>
           <figcaption className="mt-3 text-small text-muted">Live site, captured October 2026.</figcaption>
@@ -181,6 +181,6 @@ export default async function CaseStudy({ params }: PageProps<"/work/[slug]">) {
           </Link>
         </div>
       </nav>
-    </main>
+    </PageMotion>
   );
 }
