@@ -1,26 +1,266 @@
 @import "tailwindcss";
 
+/*
+ * Design tokens: palette "Rhododendron" (direction A) with the large work
+ * index from direction B. Light values first, dark values follow the
+ * visitor's system setting.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --bg: #edf0f3; /* mist */
+  --surface: #f7f8fa; /* slate */
+  --ink: #13233a; /* prussian ink */
+  --muted: #5a6676; /* haze */
+  --accent: #c2304a; /* rhododendron */
+  --rule: #d3d9e1;
+  --ok: #2f7d5b;
+  --on-ink: #edf0f3;
+  color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg: #0e1622;
+    --surface: #152031;
+    --ink: #e3e8ef;
+    --muted: #9aa6b5;
+    --accent: #f0677f;
+    --rule: #24324a;
+    --ok: #5fc495;
+    --on-ink: #0e1622;
+    color-scheme: dark;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-rule: var(--rule);
+  --color-ok: var(--ok);
+  --color-on-ink: var(--on-ink);
+
+  --font-serif: var(--font-newsreader), "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-hanken), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --text-display: clamp(3.5rem, 10.5vw, 11rem);
+  --text-display--line-height: 0.9;
+  --text-index: clamp(2.25rem, 6vw, 5.5rem);
+  --text-index--line-height: 1;
+  --text-h2: clamp(2.25rem, 5vw, 4rem);
+  --text-h2--line-height: 1.05;
+  --text-h3: 1.5rem;
+  --text-h3--line-height: 1.25;
+  --text-lead: clamp(1.25rem, 2vw, 1.625rem);
+  --text-lead--line-height: 1.4;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.65;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.5;
+
+  --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    background: var(--bg);
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  /* Anchor targets clear the fixed nav when scrolled to without Lenis. */
+  [id] {
+    scroll-margin-top: 5.5rem;
+  }
+}
+
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: 90rem;
+    margin-inline: auto;
+    padding-inline: max(1rem, env(safe-area-inset-left, 0px), 4vw);
+  }
+
+  /* Text link: ink text, accent underline. */
+  .link {
+    text-decoration-line: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.22em;
+    transition: color 0.3s var(--ease-reveal);
+  }
+  .link:hover {
+    color: var(--accent);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.875rem;
+    padding: 0.625rem 1.25rem;
+    border-radius: 999px;
+    border: 1px solid var(--rule);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    line-height: 1.2;
+    color: var(--ink);
+    transition:
+      background-color 0.3s var(--ease-reveal),
+      border-color 0.3s var(--ease-reveal),
+      color 0.3s var(--ease-reveal);
+  }
+  .btn:hover {
+    border-color: var(--ink);
+  }
+  .btn-primary {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--on-ink);
+  }
+  .btn-primary:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg);
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    font-size: var(--text-small);
+    line-height: 1.4;
+    color: var(--ink);
+  }
+
+  .skip-link {
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+    z-index: 200;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    background: var(--ink);
+    color: var(--on-ink);
+    font-weight: 600;
+    transform: translateY(-200%);
+  }
+  .skip-link:focus-visible {
+    transform: none;
+  }
+
+  /* Work index: row screenshot shows inline where hover previews are not used. */
+  .work-row-shot {
+    display: block;
+  }
+  @media (hover: hover) and (pointer: fine) and (min-width: 1024px) {
+    .js-motion .work-row-shot {
+      display: none;
+    }
+  }
+}
+
+/*
+ * Motion states. Nothing is hidden unless the inline script in layout.tsx
+ * added .js-motion to <html>, which it never does with reduced motion, and
+ * which it removes again if the motion code has not started within 4s.
+ */
+.intro {
+  display: none;
+}
+.js-motion:not(.intro-seen) .intro {
+  display: flex;
+}
+.js-motion:not(.intro-seen) body {
+  overflow: hidden;
+}
+.js-motion [data-split],
+.js-motion [data-hero-reveal] {
+  visibility: hidden;
+}
+.js-motion [data-reveal="clip"] {
+  clip-path: inset(100% 0% 0% 0%);
+}
+/* While the intro runs, the hero name sits above the intro panel so the Flip is never covered. */
+.js-motion:not(.intro-seen) [data-hero-name] {
+  position: relative;
+  z-index: 110;
+}
+
+/* SplitText masks: keep descenders and italic overhangs inside the mask. */
+.split-mask {
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.split-mask-wide {
+  padding-inline: 0.06em;
+  margin-inline: -0.06em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/*
+ * SunyaVerse walkthrough. The stacked list is the default; on wide screens
+ * with motion it becomes visually hidden (still read by screen readers) and
+ * the pinned stage takes over.
+ */
+.walk-stage {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .js-motion .walk-stage {
+    display: grid;
+  }
+  .js-motion .walk-list {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .js-motion [data-walk-panel]:not(:first-child) {
+    clip-path: inset(100% 0% 0% 0%);
+  }
+  .js-motion [data-walk-detail]:not(:first-child) {
+    visibility: hidden;
+  }
 }
