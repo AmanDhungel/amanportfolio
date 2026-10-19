@@ -42,7 +42,10 @@ function field(formData: FormData, name: string): string {
   return typeof value === "string" ? value.trim() : "";
 }
 
-export async function sendContact(_previous: ContactState, formData: FormData): Promise<ContactState> {
+export async function sendContact(
+  _previous: ContactState,
+  formData: FormData,
+): Promise<ContactState> {
   const values = {
     name: field(formData, "name"),
     email: field(formData, "email"),
@@ -53,22 +56,36 @@ export async function sendContact(_previous: ContactState, formData: FormData): 
   const honeypot = field(formData, "company");
   const startedAt = Number(field(formData, "startedAt"));
   if (honeypot || !startedAt || Date.now() - startedAt < MIN_FILL_MS) {
-    return { status: "success", message: "Thanks. Your message is on its way." };
+    return {
+      status: "success",
+      message: "Thanks. Your message is on its way.",
+    };
   }
 
   const fieldErrors: ContactState["fieldErrors"] = {};
   if (!values.name) fieldErrors.name = "Enter your name.";
-  else if (values.name.length > 100) fieldErrors.name = "Use 100 characters or fewer.";
+  else if (values.name.length > 100)
+    fieldErrors.name = "Use 100 characters or fewer.";
   if (!EMAIL_PATTERN.test(values.email) || values.email.length > 200)
     fieldErrors.email = "Enter an email address like name@example.com.";
-  if (values.message.length < 10) fieldErrors.message = "Write at least 10 characters.";
-  else if (values.message.length > 5000) fieldErrors.message = "Keep it under 5,000 characters.";
+  if (values.message.length < 10)
+    fieldErrors.message = "Write at least 10 characters.";
+  else if (values.message.length > 5000)
+    fieldErrors.message = "Keep it under 5,000 characters.";
   if (Object.keys(fieldErrors).length > 0) {
-    return { status: "error", message: "Check the highlighted fields.", fieldErrors, values };
+    return {
+      status: "error",
+      message: "Check the highlighted fields.",
+      fieldErrors,
+      values,
+    };
   }
 
   const requestHeaders = await headers();
-  const ip = requestHeaders.get("x-forwarded-for")?.split(",")[0]?.trim() || requestHeaders.get("x-real-ip") || "unknown";
+  const ip =
+    requestHeaders.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    requestHeaders.get("x-real-ip") ||
+    "unknown";
   if (rateLimited(ip)) {
     return {
       status: "error",
@@ -89,17 +106,27 @@ export async function sendContact(_previous: ContactState, formData: FormData): 
   try {
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
-      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
-        from: process.env.CONTACT_FROM_EMAIL ?? "Portfolio <onboarding@resend.dev>",
-        to: [process.env.CONTACT_TO_EMAIL ?? person.email],
+        // `||`, not `??`: a variable left empty in .env should fall back too.
+        from:
+          process.env.CONTACT_FROM_EMAIL || "Portfolio <onboarding@resend.dev>",
+        to: [process.env.CONTACT_TO_EMAIL || person.email],
         reply_to: values.email,
         subject: `Portfolio message from ${values.name}`,
         text: `${values.message}\n\nFrom: ${values.name} <${values.email}>`,
       }),
       signal: AbortSignal.timeout(10_000),
     });
-    if (!response.ok) throw new Error(`Resend responded ${response.status}`);
+    if (!response.ok) {
+      // Resend explains rejections in the body, e.g. a 403 when the test sender
+      // is used to mail anyone other than the account owner.
+      const detail = await response.text().catch(() => "");
+      throw new Error(`Resend responded ${response.status}: ${detail}`);
+    }
   } catch (error) {
     console.error("Contact form send failed", error);
     return {
@@ -109,5 +136,8 @@ export async function sendContact(_previous: ContactState, formData: FormData): 
     };
   }
 
-  return { status: "success", message: "Thanks. Your message is on its way, and I'll reply by email." };
+  return {
+    status: "success",
+    message: "Thanks. Your message is on its way, and I'll reply by email.",
+  };
 }

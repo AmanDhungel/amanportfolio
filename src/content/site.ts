@@ -81,7 +81,10 @@ export const person = {
   availability: "Open to full-time roles",
   email: "dhungelaman2000@gmail.com",
   phone: { display: "+977 986-780-6220", href: "tel:+9779867806220" },
-  resume: { href: "/Aman_Dhungel_Resume.pdf", fileName: "Aman_Dhungel_Resume.pdf" },
+  resume: {
+    href: "/Aman_Dhungel_Resume.pdf",
+    fileName: "Aman_Dhungel_Resume.pdf",
+  },
   github: "https://github.com/AmanDhungel",
   linkedin: "https://www.linkedin.com/in/aman-dhungel-1a4773187/",
   seo: {
@@ -240,7 +243,10 @@ export const featured: FeaturedProject[] = [
     outcome: "Live as a working product. The source is public on GitHub.",
     links: [
       { label: "Live site", href: "https://my-cms-ebon.vercel.app/" },
-      { label: "Source on GitHub", href: "https://github.com/AmanDhungel/my-cms" },
+      {
+        label: "Source on GitHub",
+        href: "https://github.com/AmanDhungel/my-cms",
+      },
     ],
     shot: {
       src: emsHome,
@@ -264,8 +270,14 @@ export const featured: FeaturedProject[] = [
       "The business has since moved to a simpler services site at the same address, for sales, installation and maintenance.",
     ],
     stack: ["React", "GSAP", "JavaScript", "CSS", "SEO"],
-    outcome: "The business is easy to find online and gets enquiries through its website.",
-    links: [{ label: "ssstoreandsuppliers.com", href: "https://www.ssstoreandsuppliers.com/" }],
+    outcome:
+      "The business is easy to find online and gets enquiries through its website.",
+    links: [
+      {
+        label: "ssstoreandsuppliers.com",
+        href: "https://www.ssstoreandsuppliers.com/",
+      },
+    ],
     shot: {
       src: ssHome,
       alt: "SS Store and Suppliers home page headed 'Complete CCTV and Security Camera Solutions, Installed Right', with a four-camera surveillance mock-up.",
@@ -292,25 +304,41 @@ export const walkthrough = {
       id: "scheduling",
       title: "Staff scheduling",
       body: "Owners set each employee's weekly shifts, then change single days or mark time off without touching the rest of the week.",
-      points: ["Weekly shifts per employee", "One-off changes per date", "Days off and time off"],
+      points: [
+        "Weekly shifts per employee",
+        "One-off changes per date",
+        "Days off and time off",
+      ],
     },
     {
       id: "ticketing",
       title: "Ticketing",
       body: "Organisers sell tickets on the platform. Seats are held during checkout, paid with Stripe, and checked in at the door from a QR code.",
-      points: ["Ticket types and promo codes", "Five-minute hold during checkout", "QR check-in at the door"],
+      points: [
+        "Ticket types and promo codes",
+        "Five-minute hold during checkout",
+        "QR check-in at the door",
+      ],
     },
     {
       id: "analytics",
       title: "Analytics",
       body: "Each business sees what is happening today and what is coming, plus a seven-day view of appointments and paid sales.",
-      points: ["Today and upcoming bookings", "Appointments and sales per day", "Ticket redemptions per event"],
+      points: [
+        "Today and upcoming bookings",
+        "Appointments and sales per day",
+        "Ticket redemptions per event",
+      ],
     },
     {
       id: "mobile",
       title: "Mobile app",
       body: "A React Native and Expo app for customers and businesses, running on the same backend as the website.",
-      points: ["Versioned mobile API", "Short access tokens with rotating refresh tokens", "Rate limits per user, not per network"],
+      points: [
+        "Versioned mobile API",
+        "Short access tokens with rotating refresh tokens",
+        "Rate limits per user, not per network",
+      ],
       status: "In progress",
     },
   ] satisfies WalkthroughStep[],
@@ -324,23 +352,34 @@ export const otherWork: OtherProject[] = [
     role: "Full-stack (contract)",
     year: "2022",
     stack: ["Next.js", "Node.js", "TypeScript", "MongoDB", "GSAP"],
-    link: { label: "nationalhomedecor.com.np", href: "https://nationalhomedecor.com.np/" },
+    link: {
+      label: "nationalhomedecor.com.np",
+      href: "https://nationalhomedecor.com.np/",
+    },
   },
   {
     name: "Bamboo Home Support",
-    description: "Website for a registered NDIS disability support provider in South Australia.",
+    description:
+      "Website for a registered NDIS disability support provider in South Australia.",
     role: "Web developer",
     year: "2024",
     stack: ["WordPress"],
-    link: { label: "bamboohomesupport.com.au", href: "https://bamboohomesupport.com.au/" },
+    link: {
+      label: "bamboohomesupport.com.au",
+      href: "https://bamboohomesupport.com.au/",
+    },
   },
   {
     name: "Bamboo Nursing",
-    description: "Website for a community and home nursing service in South Australia.",
+    description:
+      "Website for a community and home nursing service in South Australia.",
     role: "Web developer",
     year: "2024",
     stack: ["WordPress"],
-    link: { label: "bamboonursing.com.au", href: "https://bamboonursing.com.au/" },
+    link: {
+      label: "bamboonursing.com.au",
+      href: "https://bamboonursing.com.au/",
+    },
   },
   {
     name: "Real-time Chat App",
@@ -349,7 +388,10 @@ export const otherWork: OtherProject[] = [
     role: "Personal project",
     year: "2024",
     stack: ["React", "Firebase", "Zustand", "Vite"],
-    link: { label: "Source on GitHub", href: "https://github.com/AmanDhungel/Real-time-Chat-App" },
+    link: {
+      label: "Source on GitHub",
+      href: "https://github.com/AmanDhungel/Real-time-Chat-App",
+    },
   },
   {
     name: "Hotel Royal Sen",
@@ -398,7 +440,9 @@ export const experience: Role[] = [
     start: "May 2024",
     end: "Mar 2025",
     current: false,
-    points: ["Built WordPress websites and web applications, including bamboohomesupport.com.au and bamboonursing.com.au."],
+    points: [
+      "Built WordPress websites and web applications, including bamboohomesupport.com.au and bamboonursing.com.au.",
+    ],
   },
   {
     company: "FatDog Labs Agency",
@@ -447,14 +491,26 @@ export const experience: Role[] = [
     start: "2022",
     end: "2022",
     current: false,
-    points: ["Built a mobile-first hotel booking site with Sass and JavaScript, which brought in more visitors on phones."],
+    points: [
+      "Built a mobile-first hotel booking site with Sass and JavaScript, which brought in more visitors on phones.",
+    ],
   },
 ];
 
 export const skills: { group: string; items: string[] }[] = [
   {
     group: "Cloud and architecture",
-    items: ["AWS Lambda", "S3", "API Gateway", "ECS", "IAM", "SNS", "Event-driven architecture", "System design", "Docker"],
+    items: [
+      "AWS Lambda",
+      "S3",
+      "API Gateway",
+      "ECS",
+      "IAM",
+      "SNS",
+      "Event-driven architecture",
+      "System design",
+      "Docker",
+    ],
   },
   {
     group: "Full-stack engineering",
@@ -479,11 +535,30 @@ export const skills: { group: string; items: string[] }[] = [
   },
   {
     group: "Data and integrations",
-    items: ["PostgreSQL", "MySQL", "MongoDB", "Redis", "Prisma ORM", "GraphQL", "Firebase", "REST APIs", "JWT authentication", "Stripe"],
+    items: [
+      "PostgreSQL",
+      "MySQL",
+      "MongoDB",
+      "Redis",
+      "Prisma ORM",
+      "GraphQL",
+      "Firebase",
+      "REST APIs",
+      "JWT authentication",
+      "Stripe",
+    ],
   },
   {
     group: "Delivery and quality",
-    items: ["GitHub Actions", "GitLab CI", "CI/CD", "Git", "Staging and production deployments", "Code reviews", "Technical leadership"],
+    items: [
+      "GitHub Actions",
+      "GitLab CI",
+      "CI/CD",
+      "Git",
+      "Staging and production deployments",
+      "Code reviews",
+      "Technical leadership",
+    ],
   },
 ];
 
@@ -493,4 +568,3 @@ export const nav = [
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];
-
