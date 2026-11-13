@@ -2,7 +2,7 @@
  * The site's public origin, used for canonical URLs, Open Graph, the sitemap
  * and JSON-LD.
  *
- * 1. NEXT_PUBLIC_SITE_URL wins when set (e.g. https://dhungelaman.info).
+ * 1. NEXT_PUBLIC_SITE_URL wins when set (e.g. https://www.amandhungel.com.np).
  * 2. On Vercel, VERCEL_PROJECT_PRODUCTION_URL is the production domain: the
  *    custom domain once one is attached, the *.vercel.app domain before that.
  * 3. Locally, localhost.

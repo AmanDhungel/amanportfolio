@@ -59,7 +59,8 @@ export type WalkthroughStep = {
 };
 
 export type Role = {
-  company: string;
+  /** Omitted for a grouped entry such as earlier freelance work. */
+  company?: string;
   location?: string;
   title: string;
   type?: string;
@@ -76,11 +77,11 @@ export const person = {
   lastName: "Dhungel",
   role: "Full-Stack Developer",
   headline:
-    "Full-stack developer building fast, secure web platforms with React, Next.js and Node.js, and leading the teams that ship them.",
+    "Full-stack developer building fast, secure web platforms with TypeScript, React, Next.js and Node.js, and leading the teams that ship them.",
   location: "Kathmandu, Nepal",
-  availability: "Open to full-time roles",
+  availability: "Open to remote contract and full-time roles",
   email: "dhungelaman2000@gmail.com",
-  phone: { display: "+977 986-780-6220", href: "tel:+9779867806220" },
+  phone: { display: "+977 9867806220", href: "tel:+9779867806220" },
   resume: {
     href: "/Aman_Dhungel_Resume.pdf",
     fileName: "Aman_Dhungel_Resume.pdf",
@@ -90,16 +91,16 @@ export const person = {
   seo: {
     title: "Aman Dhungel | Full-Stack Developer (React, Next.js, Node.js)",
     description:
-      "Aman Dhungel is a full-stack developer in Kathmandu with 4+ years of experience building booking, ticketing, e-commerce and business platforms with React, Next.js, Node.js, TypeScript and AWS.",
+      "Aman Dhungel is a full-stack developer in Kathmandu with 4+ years of experience building production web apps: booking, Stripe payments, event ticketing and business platforms with TypeScript, React, Next.js, Node.js and AWS.",
   },
 };
 
 export const about = {
   lead: "I build production web platforms end to end, and I lead the small teams that ship them.",
   paragraphs: [
-    "Over four years I have taken products from an empty repository to live traffic: booking and ticketing for Australian businesses, an operations and accounting suite, and online stores for shops in Nepal. I design the API and the database, build the interface, and set up the pipeline that deploys it.",
-    "At Gurukulhub I lead six developers. I plan the work, review the code, and take releases through staging into production. When a deployment breaks, I find out why and fix the process so it does not happen again.",
-    "I care about software that stays up and stays fast once real people use it: rate limits before they are needed, data rules the database enforces, and documentation the next developer can follow.",
+    "I have built production web apps for over four years, including freelance and contract work since 2022: booking, payments and event ticketing for Australian businesses, an employee and accounting system, and online stores for shops in Nepal. I design the API and the database, build the interface, and set up the pipeline that deploys it.",
+    "Right now I build whaustralia.com remotely for an Australian client as its sole engineer, and I lead a team of six developers at GurukulHub. I plan the work, review the code, and take releases through staging into production. When a deployment breaks, I find out why and fix the process so it does not happen again.",
+    "I care about software that stays up and stays fast once real people use it: unit tests on the parts that handle money, error tracking in production, rollback runbooks for bad releases, and rate limits before they are needed.",
   ],
   education: {
     degree: "Bachelor of Information Technology (B.IT)",
@@ -135,7 +136,7 @@ export const featured: FeaturedProject[] = [
     name: "What's Happening Australia",
     summary:
       "A community platform where Australians find local businesses and events, book services and buy tickets.",
-    client: "SunyaVerse",
+    client: "Sunyaverse",
     role: "Sole full-stack developer, design to deployment",
     period: "Jan 2026 – present",
     year: "2026",
@@ -195,7 +196,7 @@ export const featured: FeaturedProject[] = [
     slug: "ems",
     name: "EMS",
     summary:
-      "An all-in-one business system: employees, field work, products and stock, and accounting in one place.",
+      "An employee management system that runs a whole business in one place: employees, field jobs, products and stock, and accounting.",
     client: "Own product",
     role: "Designer and full-stack developer",
     period: "Sep 2026 – present",
@@ -361,8 +362,8 @@ export const otherWork: OtherProject[] = [
     name: "Bamboo Home Support",
     description:
       "Website for a registered NDIS disability support provider in South Australia.",
-    role: "Web developer",
-    year: "2024",
+    role: "Web developer, Suvaansh Group",
+    year: "2025–26",
     stack: ["WordPress"],
     link: {
       label: "bamboohomesupport.com.au",
@@ -373,12 +374,24 @@ export const otherWork: OtherProject[] = [
     name: "Bamboo Nursing",
     description:
       "Website for a community and home nursing service in South Australia.",
-    role: "Web developer",
-    year: "2024",
+    role: "Web developer, Suvaansh Group",
+    year: "2025–26",
     stack: ["WordPress"],
     link: {
       label: "bamboonursing.com.au",
       href: "https://bamboonursing.com.au/",
+    },
+  },
+  {
+    name: "Navigate Well",
+    description:
+      "Website for an Australian NDIS support-coordination and recovery-coaching provider.",
+    role: "Web developer, Suvaansh Group",
+    year: "2025–26",
+    stack: ["WordPress"],
+    link: {
+      label: "navigatewell.com.au",
+      href: "https://navigatewell.com.au/",
     },
   },
   {
@@ -404,7 +417,7 @@ export const otherWork: OtherProject[] = [
 
 export const experience: Role[] = [
   {
-    company: "SunyaVerse",
+    company: "Sunyaverse",
     location: "Remote, Australia",
     title: "Full-Stack Developer",
     type: "Freelance",
@@ -412,151 +425,123 @@ export const experience: Role[] = [
     end: "Present",
     current: true,
     points: [
-      "Designed and built whaustralia.com on my own, frontend and backend, as a place to discover and promote local businesses, services and events.",
-      "Built booking and scheduling that manages employee shifts, working days and days off, and matches staff or independent providers to customer bookings.",
-      "Added event ticketing so organisers sell tickets on the platform, with built-in analytics.",
-      "Hardened the platform with rate limiting and CSRF and XSS protection.",
-      "Building a React Native and Expo app on the same backend APIs.",
+      "Designed and built whaustralia.com end to end as sole engineer: an Australian community platform for discovering and promoting local businesses, services and events.",
+      "Built a booking and scheduling system that lets businesses manage employee shifts, working days and days off, and connects staff or independent providers with customer bookings.",
+      "Added event ticketing with Stripe payments and QR check-in, plus a business dashboard for bookings, sales and ticket redemptions.",
+      "Hardened the platform with Redis-backed rate limiting and CSRF and XSS protection.",
+      "Building a React Native and Expo mobile app on the same backend APIs (in progress).",
     ],
     link: { label: "whaustralia.com", href: "https://whaustralia.com" },
   },
   {
-    company: "Gurukulhub",
+    company: "GurukulHub",
     location: "Maharajgunj, Kathmandu",
     title: "Full-Stack Developer",
     start: "Oct 2025",
     end: "Present",
     current: true,
     points: [
-      "Lead a team of six developers across several projects, from development to production release.",
-      "Set up CI/CD pipelines and manage deployments to separate staging and live environments.",
-      "Containerised applications with Docker for repeatable deployments.",
-      "Diagnose and fix deployment failures so the team keeps shipping.",
+      "Lead a team of six developers across multiple projects, guiding delivery from development through production release.",
+      "Set up CI/CD pipelines and manage deployments across separate staging and production environments.",
+      "Containerised applications with Docker, building and managing images for consistent, repeatable deployments, and resolve deployment failures.",
     ],
   },
   {
     company: "Suvaansh Group",
     title: "Web Developer and Marketing Manager",
-    start: "May 2024",
-    end: "Mar 2025",
+    type: "Full-time Jun – Oct 2025, then freelance",
+    start: "Jun 2025",
+    end: "Apr 2026",
     current: false,
     points: [
-      "Built WordPress websites and web applications, including bamboohomesupport.com.au and bamboonursing.com.au.",
+      "Built and maintained WordPress websites for Australian clients, including bamboohomesupport.com.au and bamboonursing.com.au.",
+      "Built navigatewell.com.au in WordPress, the website for an Australian NDIS support-coordination provider.",
+      "Managed social media and designed posts for three companies at once: Bamboo Home Support, Bamboo Nursing and Navigate Well.",
     ],
   },
   {
-    company: "FatDog Labs Agency",
+    company: "Fatdog Labs Agency",
     location: "Guhyeshwori, Kathmandu",
     title: "Junior Frontend Developer",
     start: "Mar 2024",
     end: "Feb 2025",
     current: false,
     points: [
-      "Built three or more client web applications with Next.js, TypeScript and GraphQL. Client names are confidential.",
-      "Used Redux, Zustand and TanStack Query to cut load times and keep data in sync.",
-      "Worked with designers and backend teams to integrate REST APIs.",
+      "Developed three or more web applications with Next.js, TypeScript and GraphQL for agency clients. Client names are confidential.",
+      "Used Redux and Zustand for state, and TanStack Query for data fetching, to speed up page loads.",
+      "Integrated REST APIs with designers and backend teams.",
     ],
   },
   {
-    company: "SS Store & Suppliers",
-    location: "Bardibas, Mahottari",
-    title: "Frontend Developer",
-    type: "Contract",
-    start: "Oct 2023",
+    title: "Earlier freelance and contract work",
+    start: "2022",
     end: "Feb 2024",
     current: false,
     points: [
-      "Built an e-commerce store with React and GSAP, and grew sales through technical, on-page and off-page SEO.",
-      "Designed responsive UI components and integrated third-party libraries to simplify checkout.",
-    ],
-  },
-  {
-    company: "Maa Kali Hardware",
-    location: "Bhaktapur",
-    title: "Full-Stack Developer",
-    type: "Contract",
-    start: "2022",
-    end: "2022",
-    current: false,
-    points: [
-      "Built a full-stack store with Next.js, Node.js and TypeScript, and made server responses faster.",
-      "Added GSAP interactions that kept visitors on the site longer.",
-    ],
-  },
-  {
-    company: "Hotel Royal Sen",
-    location: "Bardibas, Mahottari",
-    title: "Frontend Developer",
-    type: "Contract",
-    start: "2022",
-    end: "2022",
-    current: false,
-    points: [
-      "Built a mobile-first hotel booking site with Sass and JavaScript, which brought in more visitors on phones.",
+      "nationalhomedecor.com.np (Maa Kali Hardware, 2022): full-stack online store with Next.js, Node.js and TypeScript, with cart, eSewa payments, blog and admin panel.",
+      "ssstoreandsuppliers.com (SS Store & Suppliers, Oct 2023 – Feb 2024): React and GSAP e-commerce site with a streamlined checkout and technical SEO.",
+      "Hotel Royal Sen (2022): mobile-first hotel booking site built with Sass and JavaScript.",
     ],
   },
 ];
 
 export const skills: { group: string; items: string[] }[] = [
   {
-    group: "Cloud and architecture",
-    items: [
-      "AWS Lambda",
-      "S3",
-      "API Gateway",
-      "ECS",
-      "IAM",
-      "SNS",
-      "Event-driven architecture",
-      "System design",
-      "Docker",
-    ],
-  },
-  {
-    group: "Full-stack engineering",
+    group: "Frontend",
     items: [
       "TypeScript",
       "JavaScript (ES6+)",
       "React",
       "Next.js",
-      "Node.js",
-      "Express.js",
+      "React Native",
+      "Expo",
       "Redux",
       "Zustand",
       "TanStack Query",
-      "React Native",
-      "Expo",
-      "HTML5",
-      "CSS3",
       "Tailwind CSS",
-      "GSAP",
-      "WordPress",
     ],
   },
   {
-    group: "Data and integrations",
+    group: "Backend and data",
     items: [
+      "Node.js",
+      "Express.js",
+      "REST APIs",
+      "GraphQL",
       "PostgreSQL",
       "MySQL",
       "MongoDB",
       "Redis",
       "Prisma ORM",
-      "GraphQL",
       "Firebase",
-      "REST APIs",
-      "JWT authentication",
       "Stripe",
+      "JWT authentication",
     ],
   },
   {
-    group: "Delivery and quality",
+    group: "Cloud and DevOps",
     items: [
+      "AWS Lambda",
+      "AWS S3",
+      "API Gateway",
+      "ECS",
+      "IAM",
+      "SNS",
+      "Docker",
       "GitHub Actions",
       "GitLab CI",
-      "CI/CD",
-      "Git",
+      "Event-driven architecture",
       "Staging and production deployments",
+    ],
+  },
+  {
+    group: "Practices",
+    items: [
+      "System design",
       "Code reviews",
+      "Unit testing",
+      "Error tracking",
+      "Rollback runbooks",
       "Technical leadership",
     ],
   },

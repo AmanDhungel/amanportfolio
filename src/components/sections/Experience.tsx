@@ -6,7 +6,7 @@ export function Experience() {
     <section id="experience" aria-labelledby="experience-title" className="border-t border-rule py-20 md:py-32">
       <div className="container-page">
         <SectionHeading id="experience-title" title="Experience">
-          Seven roles since 2022, from contract builds to leading a team of six.
+          Four years of production work since 2022, from contract builds to leading a team of six.
         </SectionHeading>
 
         <div data-timeline className="relative mt-14 md:mt-20">
@@ -21,7 +21,7 @@ export function Experience() {
           <ol className="grid gap-12 md:gap-16">
             {experience.map((role) => (
               <li
-                key={`${role.company}-${role.start}`}
+                key={`${role.title}-${role.start}`}
                 data-timeline-item
                 className="relative grid gap-3 pl-8 md:grid-cols-4 md:gap-0 md:pl-0"
               >
@@ -39,7 +39,7 @@ export function Experience() {
 
                 <div className="md:col-span-3 md:pl-10">
                   <h3 className="font-serif text-h3 font-normal md:text-[1.75rem]">
-                    {role.title}, {role.company}
+                    {[role.title, role.company].filter(Boolean).join(", ")}
                     {role.current ? (
                       <span className="ml-3 inline-block translate-y-[-0.15em] rounded-full border border-ok px-2.5 py-0.5 align-middle font-sans text-small text-ink">
                         Current

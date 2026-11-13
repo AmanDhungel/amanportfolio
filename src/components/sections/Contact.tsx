@@ -14,7 +14,7 @@ export function Contact() {
           Hiring a full-stack developer?
         </h2>
         <p data-split="lines" className="mt-5 max-w-[52ch] text-lead text-muted">
-          I am looking for a full-time role. Email is quickest, or send a message with the form.
+          I am open to remote contract and full-time roles. Email is quickest, or send a message with the form.
         </p>
 
         <div className="mt-12 grid gap-16 md:mt-16 md:grid-cols-12 md:gap-10">
