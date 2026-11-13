@@ -79,17 +79,13 @@ Without a key the site still works: the form tells visitors to email you directl
 
 ### Custom domain (amandhungel.com.np)
 
-Canonical URLs, the sitemap, `robots.txt`, Open Graph and JSON-LD all take their address from [`src/lib/site-url.ts`](src/lib/site-url.ts):
+The site's address is `https://www.amandhungel.com.np`, set once as `PRODUCTION_URL` in [`src/lib/site-url.ts`](src/lib/site-url.ts).
 
-1. `NEXT_PUBLIC_SITE_URL`, if it is set in Vercel. It wins over everything else, so it must be the address you want Google to index.
-2. Otherwise Vercel's production domain: the primary custom domain, or the `*.vercel.app` address if there is none.
+- **Production builds on Vercel** use it for canonical URLs, the sitemap, `robots.txt`, Open Graph and JSON-LD, whatever `NEXT_PUBLIC_SITE_URL` says. Previews and local builds use `NEXT_PUBLIC_SITE_URL`, then Vercel's domain, then localhost.
+- **amandhungel.info** (with or without `www`) redirects permanently to the same path on amandhungel.com.np. The redirect is in [`next.config.ts`](next.config.ts).
+- **To change domain**, edit `PRODUCTION_URL`, add the new domain in Vercel (**Project → Settings → Domains**), and redeploy.
 
-To keep one address in search results:
-
-1. In Vercel, **Project → Settings → Domains**, mark `www.amandhungel.com.np` as the primary domain. Set every other domain on the project to redirect to it.
-2. Set `NEXT_PUBLIC_SITE_URL=https://www.amandhungel.com.np`, or delete the variable so the primary domain is used. Then redeploy: `NEXT_PUBLIC_` values are fixed at build time.
-3. Check that `https://www.amandhungel.com.np/robots.txt` lists the sitemap on that domain.
-4. In [Google Search Console](https://search.google.com/search-console), add the domain and submit `https://www.amandhungel.com.np/sitemap.xml`.
+After a domain change, add the domain in [Google Search Console](https://search.google.com/search-console) and submit `https://www.amandhungel.com.np/sitemap.xml`.
 
 ## How the motion works
 
